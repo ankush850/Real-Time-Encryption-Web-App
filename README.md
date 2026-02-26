@@ -28,6 +28,7 @@
 A powerful web-based tool for real-time encryption and decryption of text and files.
 
 ## System Architecture
+
 ```mermaid
 graph TB
     subgraph "Client Browser"
@@ -86,3 +87,35 @@ graph TB
     Theme --> Storage
     Notif --> UI
  ```
+
+
+## Application Flow Architecture
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant UI as Interface
+    participant App as App Controller
+    participant Factory as Encryption Factory
+    participant AES as AES Engine
+    participant XOR as XOR Engine
+    participant Crypto as Web Crypto API
+    
+    User->>UI: 1. Input Text/File
+    UI->>App: 2. Process Input
+    App->>Factory: 3. Get Algorithm
+    
+    alt AES-256 Selected
+        Factory->>AES: 4a. Route to AES
+        AES->>Crypto: 5a. Call Web Crypto
+        Crypto-->>AES: 6a. Encrypted Data
+        AES-->>Factory: 7a. Return Result
+    else XOR Selected
+        Factory->>XOR: 4b. Route to XOR
+        XOR-->>Factory: 5b. Return Result
+    end
+    
+    Factory-->>App: 8. Return Processed Data
+    App-->>UI: 9. Update Display
+    UI-->>User: 10. Show Result
+```
