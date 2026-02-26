@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Encryption Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/light-theme.css" id="theme-stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="assets/icons/encrypt.svg" alt="Logo" width="32" height="32">
+                <h1>🔐 Real-Time Encryption</h1>
+            </div>
+            <div class="theme-toggle">
+                <button onclick="themeManager.toggleTheme()" id="theme-btn">🌓 Dark Mode</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('text')">📝 Text</button>
+                <button class="tab-btn" onclick="switchTab('file')">📁 File</button>
+            </div>
+
+            <!-- Text Encryption Panel -->
+            <div id="text-panel" class="panel active">
+                <h2>Text Encryption/Decryption</h2>
+                
+                <div class="algorithm-selector">
+                    <label for="algorithm">Algorithm:</label>
+                    <select id="algorithm" onchange="encryptionFactory.setAlgorithm(this.value)">
+                        <option value="aes">AES-256 (Secure)</option>
+                        <option value="xor">XOR (Demo)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-text">Input:</label>
+                    <textarea id="input-text" rows="5" placeholder="Enter text to encrypt or decrypt..."></textarea>
+                    <div class="btn-group small">
+                        <button onclick="fileHandler.pasteFromClipboard()">📋 Paste</button>
+                        <button onclick="clearInput()">🗑️ Clear</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="encryption-key">Key:</label>
+                    <div class="key-input">
+                        <input type="password" id="encryption-key" value="my-secret-key-2024" placeholder="Enter encryption key">
+                        <button onclick="keyGenerator.generate()" title="Generate random key">🎲</button>
+                        <button onclick="toggleKeyVisibility()" title="Show/Hide">👁️</button>
+                    </div>
+                    <div class="key-strength" id="key-strength">
+                        <div class="strength-bar"></div>
+                        <span>Strength: <span id="strength-text">Medium</span></span>
+                    </div>
+                </div>
+
+                <div class="action-btns">
+                    <button class="btn-encrypt" onclick="handleEncrypt()">🔒 Encrypt</button>
+                    <button class="btn-decrypt" onclick="handleDecrypt()">🔓 Decrypt</button>
+                </div>
+
+                <div class="input-group">
+                    <label for="output-text">Output:</label>
+                    <textarea id="output-text" rows="5" placeholder="Result will appear here..." readonly></textarea>
+                    <div class="btn-group small">
+                        <button onclick="fileHandler.copyToClipboard()">📋 Copy</button>
+                        <button onclick="downloadOutput()">💾 Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File Encryption Panel -->
+            <div id="file-panel" class="panel">
+                <h2>File Encryption/Decryption</h2>
+
+                <div class="algorithm-selector">
+                    <label for="file-algorithm">Algorithm:</label>
+                    <select id="file-algorithm" onchange="encryptionFactory.setAlgorithm(this.value)">
+                        <option value="aes">AES-256 (Secure)</option>
+                        <option value="xor">XOR (Demo)</option>
+                    </select>
+                </div>
+
+                <div class="dropzone" id="dropzone" 
+                    ondragover="event.preventDefault()" 
+                    ondragenter="event.preventDefault()"
+                    ondrop="fileHandler.handleDrop(event)"
+                    onclick="document.getElementById('file-input').click()">
+                    <img src="assets/icons/file.svg" alt="Upload" width="48" height="48">
+                    <p>Drag & drop file here or click to select</p>
+                    <p class="small">Max size: 10MB</p>
+                </div>
+
+                <input type="file" id="file-input" style="display: none;" onchange="fileHandler.handleFileSelect(this)">
+
+                <div id="file-info" class="file-info" style="display: none;">
+                    <p><strong>Selected:</strong> <span id="file-name"></span></p>
+                    <p><strong>Size:</strong> <span id="file-size"></span></p>
+                    <button class="btn-clear" onclick="fileHandler.clearFile()">❌ Remove</button>
+                </div>
+
+                <div class="input-group">
+                    <label for="file-key">Key:</label>
+                    <div class="key-input">
+                        <input type="password" id="file-key" value="my-secret-key-2024" placeholder="Enter encryption key">
+                        <button onclick="keyGenerator.generate()">🎲</button>
+                    </div>
+                </div>
+
+                <div class="action-btns">
+                    <button class="btn-encrypt" onclick="fileHandler.encryptFile()">🔒 Encrypt File</button>
+                    <button class="btn-decrypt" onclick="fileHandler.decryptFile()">🔓 Decrypt File</button>
+                </div>
+
+                <div id="progress-area" style="display: none;">
+                    <progress id="progress-bar" value="0" max="100"></progress>
+                    <p id="progress-status">Processing...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 Real-Time Encryption Generator | <a href="#" onclick="showAbout()">About</a></p>
+        </footer>
+    </div>
+
+    <!-- Notification Area -->
+    <div id="notifications"></div>
+
+    <!-- Scripts -->
+    <script src="js/utils/base64-utils.js"></script>
+    <script src="js/utils/key-generator.js"></script>
+    <script src="js/utils/file-handler.js"></script>
+    <script src="js/encryption/xor-encryption.js"></script>
+    <script src="js/encryption/aes-encryption.js"></script>
+    <script src="js/encryption/encryption-factory.js"></script>
+    <script src="js/ui/theme-manager.js"></script>
+    <script src="js/ui/notifications.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
