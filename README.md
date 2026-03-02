@@ -119,3 +119,27 @@ sequenceDiagram
     App-->>UI: 9. Update Display
     UI-->>User: 10. Show Result
 ```
+
+
+
+-  **Real-time encryption** - Encrypt text as you type
+- **File encryption** - Secure your files with strong encryption
+-  **Key generation** - Generate strong random encryption keys
+-  **Dark/Light theme** - Comfortable viewing in any environment
+-  **Multiple algorithms** - AES-256 (secure) and XOR (demo)
+-  **Clipboard support** - Easy copy/paste functionality
+- **Download results** - Save encrypted/decrypted output
+
+## Technologies Used
+
+- HTML5
+- CSS3 (with CSS variables for theming)
+- Vanilla JavaScript
+- Web Crypto API for AES-256 encryption
+- File API for file handling
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/real-time-encryption-webapp.git
