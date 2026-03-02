@@ -1,0 +1,123 @@
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --surface-color: #2d2d2d;
+    --border-color: #404040;
+    --primary-color: #64b5f6;
+    --hover-color: #3d3d3d;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.container {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.header {
+    border-bottom-color: var(--border-color);
+}
+
+.theme-toggle button {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+}
+
+.algorithm-selector select {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.input-group textarea {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.input-group textarea:focus {
+    border-color: var(--primary-color);
+}
+
+.input-group textarea::placeholder {
+    color: #888;
+}
+
+.key-input input {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.key-input input::placeholder {
+    color: #888;
+}
+
+.key-input button {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.key-input button:hover {
+    background-color: var(--hover-color);
+}
+
+.strength-bar {
+    background-color: var(--border-color);
+}
+
+.btn-group.small button {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.btn-group.small button:hover {
+    background-color: var(--hover-color);
+}
+
+.dropzone {
+    border-color: var(--border-color);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+}
+
+.dropzone:hover {
+    background-color: var(--hover-color);
+}
+
+.file-info {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+}
+
+.footer {
+    border-top-color: var(--border-color);
+}
+
+.footer a {
+    color: var(--primary-color);
+}
+
+.notification {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
