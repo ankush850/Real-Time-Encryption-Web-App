@@ -1,5 +1,8 @@
 
 <p align="center">
+    <img src="https://github.com/ankush850/Real-Time-Encryption-Web-App/blob/787c2e7dcb256023494b7aec111fa87b61f8cb1c/assets/icons/decrypt.svg" width="250"/>
+
+
  
   <h1 align="center">Real-Time Encryption Web App</h1>
   
